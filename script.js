@@ -52,7 +52,7 @@ function resetBoard() {
   });
 })();
 
-cards.forEach((card) => card.addEventListener("click", flipCard));
+//------------------------------------------------------
 
 let timerDisplay = document.querySelector(".timerDisplay");
 let stopBtn = document.getElementById("stopBtn");
@@ -66,6 +66,7 @@ let mins = 0;
 let timerId = null;
 
 startBtn.addEventListener("click", function () {
+  cards.forEach((card) => card.addEventListener("click", flipCard));
   console.log("Start button clicked");
   if (timerId !== null) {
     clearInterval(timerId);
