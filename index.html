@@ -6,7 +6,23 @@
     <title>Memory Game</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+  <header>
+    <h1 class="title">Dog Matching Game</h1>
+  </header>
   <body>
+    <section>
+      <button class="timer">
+        <div class="stopwatch">
+          <div class="timerDisplay">00 : 00 : 00</div>
+        </div>
+        <div class="buttons"></div>
+      </button>
+    </section>
+    <section class="gameBoard">Game Board</section>
+    <section>
+      <button id="startBtn" class="btn" style="--clr: green">Start</button>
+      <button id="resetBtn" class="btn" style="--clr: blue">Reset</button>
+    </section>
     <script src="script.js"></script>
   </body>
 </html>
