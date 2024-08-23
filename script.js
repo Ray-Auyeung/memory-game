@@ -32,9 +32,12 @@ function checkForMatch() {
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
-  firstCard.remove("front-face");
-  secondCard.remove();
-  resetBoard();
+  console.log(firstCard);
+  setTimeout(() => {
+    firstCard.style.visibility = "hidden";
+    secondCard.style.visibility = "hidden";
+    resetBoard();
+  }, 1500);
 }
 
 function unflipCards() {
@@ -84,6 +87,7 @@ resetBtn.addEventListener("click", function () {
   clearInterval(timerId);
   timerDisplay.innerHTML = `00 : 00 : 00`;
   msec = secs = mins = 0;
+  //flipcards
 });
 
 function startTimer() {
