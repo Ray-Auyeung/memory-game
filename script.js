@@ -23,13 +23,17 @@ function flipCard() {
 }
 
 function checkForMatch() {
-  let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+  let isMatch =
+    firstCard.getAttribute("data-framework") ===
+    secondCard.getAttribute("data-framework");
   isMatch ? disableCards() : unflipCards();
 }
 
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
+  firstCard.remove("front-face");
+  secondCard.remove();
   resetBoard();
 }
 
@@ -42,6 +46,7 @@ function unflipCards() {
   }, 1500);
 }
 function resetBoard() {
+  //has flipped card, lockboard set to false, first card, second card set to null after line 46
   [hasFlippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
 }
