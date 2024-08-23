@@ -29,12 +29,24 @@ function checkForMatch() {
   isMatch ? disableCards() : unflipCards();
 }
 
+// function disableCards() {
+//   firstCard.removeEventListener("click", flipCard);
+//   secondCard.removeEventListener("click", flipCard);
+//   firstCard.style.visibility = "hidden";
+//   secondCard.style.visibility = "hidden";
+//   resetBoard();
+// }
+
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
-  firstCard.remove("front-face");
-  secondCard.remove();
-  resetBoard();
+  setTimeout(() => {
+    firstCard.style.visibility = "hidden";
+    firstCard.classList.add("gone");
+    secondCard.style.visibility = "hidden";
+    secondCard.classList.add("gone");
+    resetBoard();
+  }, 1500);
 }
 
 function unflipCards() {
@@ -45,17 +57,26 @@ function unflipCards() {
     resetBoard();
   }, 1500);
 }
+
 function resetBoard() {
   //has flipped card, lockboard set to false, first card, second card set to null after line 46
   [hasFlippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
 }
-(function shuffle() {
+// (function shuffle() {
+//   cards.forEach((card) => {
+//     let ramdomPos = Math.floor(Math.random() * 12);
+//     card.style.order = ramdomPos;
+//   });
+// })();
+const shuffle = () => {
   cards.forEach((card) => {
-    let ramdomPos = Math.floor(Math.random() * 12);
+    let ramdomPos = Math.floor(Math.random() * 6);
     card.style.order = ramdomPos;
   });
-})();
+};
+
+shuffle();
 
 //------------------------------------------------------
 
@@ -77,6 +98,7 @@ startBtn.addEventListener("click", function () {
     clearInterval(timerId);
   }
   timerId = setInterval(startTimer, 10);
+  lockBoard = false;
 });
 
 resetBtn.addEventListener("click", function () {
@@ -84,6 +106,18 @@ resetBtn.addEventListener("click", function () {
   clearInterval(timerId);
   timerDisplay.innerHTML = `00 : 00 : 00`;
   msec = secs = mins = 0;
+  // firstCard.style.visibility = "visible";
+  // secondCard.style.visibility = "visible";
+  const vis = document.querySelectorAll(".gone");
+  vis.forEach((shown) => {
+    shown.classList.remove("flip");
+    shown.style.visibility = "visible";
+  });
+  setTimeout(() => {
+    shuffle();
+    resetBoard();
+    lockBoard = true;
+  }, 1500);
 });
 
 function startTimer() {
