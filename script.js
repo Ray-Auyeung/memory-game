@@ -5,6 +5,8 @@ const cards = document.querySelectorAll(".memory-card");
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
+let matches = 0;
+const totalMatches = 3;
 
 function flipCard() {
   if (lockBoard) return;
@@ -27,6 +29,17 @@ function checkForMatch() {
     firstCard.getAttribute("data-framework") ===
     secondCard.getAttribute("data-framework");
   isMatch ? disableCards() : unflipCards();
+  // step 1 - initialize matches to 0 (done at top)
+  // step 2 - when user gets a match, increment matches +1
+  // step 3 - when user gets a match, if matches === 3
+  if (isMatch === true) {
+    matches += 1;
+    // checkForMatch === true then increment it by 1???
+    // once complete === 3 then proceed with end game fuction???
+  }
+  if (matches === totalMatches) endGame();
+  // step 4 - end game (matches === 3 and timer)
+  // clearInterval() to stop timer when matches === 3???
 }
 
 // function disableCards() {
@@ -136,4 +149,8 @@ function startTimer() {
   let minsString = mins < 10 ? `0${mins}` : mins;
 
   timerDisplay.innerHTML = `${minsString} : ${secsString} : ${msecString}`;
+}
+
+function endGame() {
+  clearInterval(timerId);
 }
